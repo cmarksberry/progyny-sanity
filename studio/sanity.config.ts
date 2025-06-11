@@ -25,10 +25,12 @@ const dataset = process.env.SANITY_STUDIO_DATASET || 'production'
 const SANITY_STUDIO_PREVIEW_URL = process.env.SANITY_STUDIO_PREVIEW_URL || 'http://localhost:3000'
 const PRODUCTION_URL = 'https://progyny-sanity-frontend.vercel.app'
 
-// Use production URL when running in production Studio, localhost for local development
-const PREVIEW_URL = process.env.NODE_ENV === 'production' || process.env.SANITY_STUDIO_PREVIEW_URL === PRODUCTION_URL 
-  ? PRODUCTION_URL 
-  : SANITY_STUDIO_PREVIEW_URL
+// Use production URL when the preview URL is explicitly set to production, or when we detect hosted Studio
+const isProduction = typeof window !== 'undefined' 
+  ? window.location.hostname.includes('sanity.studio')
+  : process.env.SANITY_STUDIO_PREVIEW_URL === PRODUCTION_URL || process.env.NODE_ENV === 'production'
+
+const PREVIEW_URL = isProduction ? PRODUCTION_URL : SANITY_STUDIO_PREVIEW_URL
 
 // Define the home location for the presentation tool
 const homeLocation = {
