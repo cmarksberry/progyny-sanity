@@ -15,7 +15,7 @@
 // Source: schema.json
 export type CallToAction = {
   _type: "callToAction";
-  heading: string;
+  heading?: string;
   text?: string;
   buttonText?: string;
   link?: Link;
@@ -111,13 +111,123 @@ export type BlockContent = Array<{
   _key: string;
 }>;
 
+export type EducationalArticle = {
+  _id: string;
+  _type: "educationalArticle";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  slug?: Slug;
+  category?: "fertility" | "pregnancy" | "menopause" | "wellness" | "benefits";
+  subcategory?: "ivf" | "iui" | "egg-freezing" | "male-fertility" | "lgbtq-family-building" | "adoption-surrogacy" | "fertility-testing" | "trying-to-conceive" | "prenatal-care" | "maternal-mental-health" | "pregnancy-symptoms" | "postpartum-recovery" | "return-to-work" | "menopause-symptoms" | "treatment-options" | "workplace-support" | "nutrition-lifestyle" | "mental-health" | "benefits-navigation";
+  excerpt?: string;
+  content?: BlockContent;
+  featuredImage?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    _type: "image";
+  };
+  publishedDate?: string;
+  lastUpdated?: string;
+  author?: {
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: "person";
+  };
+  medicalReviewer?: {
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: "person";
+  };
+  readingTime?: number;
+  tags?: Array<string>;
+  targetAudience?: "individuals" | "employers" | "providers" | "consultants" | "general";
+  featured?: boolean;
+  seoTitle?: string;
+  seoDescription?: string;
+};
+
+export type Homepage = {
+  _id: string;
+  _type: "homepage";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  heroSection?: {
+    tagline?: string;
+    mainTitle?: Array<{
+      text?: string;
+      link?: string;
+      color?: "brand" | "framework" | "default";
+      _key: string;
+    }>;
+  };
+  logos?: {
+    leftLogo?: {
+      image?: {
+        asset?: {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+        };
+        media?: unknown;
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        _type: "image";
+      };
+      alt?: string;
+    };
+    rightLogo?: {
+      image?: {
+        asset?: {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+        };
+        media?: unknown;
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        _type: "image";
+      };
+      alt?: string;
+    };
+  };
+  codeSnippet?: {
+    command?: string;
+    copyButtonText?: string;
+    copiedText?: string;
+  };
+  documentationLink?: {
+    text?: string;
+    url?: string;
+    openInNewTab?: boolean;
+  };
+  seo?: {
+    description?: string;
+  };
+};
+
 export type Settings = {
   _id: string;
   _type: "settings";
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  title: string;
+  title?: string;
   description?: Array<{
     children?: Array<{
       marks?: Array<string>;
@@ -172,9 +282,9 @@ export type Page = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  name: string;
-  slug: Slug;
-  heading: string;
+  name?: string;
+  slug?: Slug;
+  heading?: string;
   subheading?: string;
   pageBuilder?: Array<{
     _key: string;
@@ -189,11 +299,11 @@ export type Post = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  title: string;
-  slug: Slug;
+  title?: string;
+  slug?: Slug;
   content?: BlockContent;
   excerpt?: string;
-  coverImage: {
+  coverImage?: {
     asset?: {
       _ref: string;
       _type: "reference";
@@ -221,9 +331,9 @@ export type Person = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  firstName: string;
-  lastName: string;
-  picture: {
+  firstName?: string;
+  lastName?: string;
+  picture?: {
     asset?: {
       _ref: string;
       _type: "reference";
@@ -274,7 +384,7 @@ export type SanityAssistOutputField = {
 
 export type SanityAssistInstructionContext = {
   _type: "sanity.assist.instruction.context";
-  reference: {
+  reference?: {
     _ref: string;
     _type: "reference";
     _weak?: boolean;
@@ -307,7 +417,7 @@ export type AssistInstructionContext = {
 
 export type SanityAssistInstructionUserInput = {
   _type: "sanity.assist.instruction.userInput";
-  message: string;
+  message?: string;
   description?: string;
 };
 
@@ -466,7 +576,7 @@ export type Geopoint = {
 
 export type Slug = {
   _type: "slug";
-  current: string;
+  current?: string;
   source?: string;
 };
 
@@ -477,7 +587,7 @@ export type SanityAssetSourceData = {
   url?: string;
 };
 
-export type AllSanitySchemaTypes = CallToAction | Link | InfoSection | BlockContent | Settings | Page | Post | Person | SanityAssistInstructionTask | SanityAssistTaskStatus | SanityAssistSchemaTypeAnnotations | SanityAssistOutputType | SanityAssistOutputField | SanityAssistInstructionContext | AssistInstructionContext | SanityAssistInstructionUserInput | SanityAssistInstructionPrompt | SanityAssistInstructionFieldRef | SanityAssistInstruction | SanityAssistSchemaTypeField | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageHotspot | SanityImageCrop | SanityFileAsset | SanityImageAsset | SanityImageMetadata | Geopoint | Slug | SanityAssetSourceData;
+export type AllSanitySchemaTypes = CallToAction | Link | InfoSection | BlockContent | EducationalArticle | Homepage | Settings | Page | Post | Person | SanityAssistInstructionTask | SanityAssistTaskStatus | SanityAssistSchemaTypeAnnotations | SanityAssistOutputType | SanityAssistOutputField | SanityAssistInstructionContext | AssistInstructionContext | SanityAssistInstructionUserInput | SanityAssistInstructionPrompt | SanityAssistInstructionFieldRef | SanityAssistInstruction | SanityAssistSchemaTypeField | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageHotspot | SanityImageCrop | SanityFileAsset | SanityImageAsset | SanityImageMetadata | Geopoint | Slug | SanityAssetSourceData;
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ./sanity/lib/queries.ts
 // Variable: settingsQuery
@@ -488,7 +598,7 @@ export type SettingsQueryResult = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  title: string;
+  title?: string;
   description?: Array<{
     children?: Array<{
       marks?: Array<string>;
@@ -541,14 +651,14 @@ export type SettingsQueryResult = {
 export type GetPageQueryResult = {
   _id: string;
   _type: "page";
-  name: string;
-  slug: Slug;
-  heading: string;
+  name: string | null;
+  slug: Slug | null;
+  heading: string | null;
   subheading: string | null;
   pageBuilder: Array<{
     _key: string;
     _type: "callToAction";
-    heading: string;
+    heading?: string;
     text?: string;
     buttonText?: string;
     link: {
@@ -591,11 +701,11 @@ export type GetPageQueryResult = {
 // Variable: sitemapData
 // Query: *[_type == "page" || _type == "post" && defined(slug.current)] | order(_type asc) {    "slug": slug.current,    _type,    _updatedAt,  }
 export type SitemapDataResult = Array<{
-  slug: string;
+  slug: string | null;
   _type: "page";
   _updatedAt: string;
 } | {
-  slug: string;
+  slug: string | null;
   _type: "post";
   _updatedAt: string;
 }>;
@@ -604,8 +714,8 @@ export type SitemapDataResult = Array<{
 export type AllPostsQueryResult = Array<{
   _id: string;
   status: "draft" | "published";
-  title: string;
-  slug: string;
+  title: string | "Untitled";
+  slug: string | null;
   excerpt: string | null;
   coverImage: {
     asset?: {
@@ -619,11 +729,11 @@ export type AllPostsQueryResult = Array<{
     crop?: SanityImageCrop;
     alt?: string;
     _type: "image";
-  };
+  } | null;
   date: string;
   author: {
-    firstName: string;
-    lastName: string;
+    firstName: string | null;
+    lastName: string | null;
     picture: {
       asset?: {
         _ref: string;
@@ -636,7 +746,7 @@ export type AllPostsQueryResult = Array<{
       crop?: SanityImageCrop;
       alt?: string;
       _type: "image";
-    };
+    } | null;
   } | null;
 }>;
 // Variable: morePostsQuery
@@ -644,8 +754,8 @@ export type AllPostsQueryResult = Array<{
 export type MorePostsQueryResult = Array<{
   _id: string;
   status: "draft" | "published";
-  title: string;
-  slug: string;
+  title: string | "Untitled";
+  slug: string | null;
   excerpt: string | null;
   coverImage: {
     asset?: {
@@ -659,11 +769,11 @@ export type MorePostsQueryResult = Array<{
     crop?: SanityImageCrop;
     alt?: string;
     _type: "image";
-  };
+  } | null;
   date: string;
   author: {
-    firstName: string;
-    lastName: string;
+    firstName: string | null;
+    lastName: string | null;
     picture: {
       asset?: {
         _ref: string;
@@ -676,7 +786,7 @@ export type MorePostsQueryResult = Array<{
       crop?: SanityImageCrop;
       alt?: string;
       _type: "image";
-    };
+    } | null;
   } | null;
 }>;
 // Variable: postQuery
@@ -706,8 +816,8 @@ export type PostQueryResult = {
   }> | null;
   _id: string;
   status: "draft" | "published";
-  title: string;
-  slug: string;
+  title: string | "Untitled";
+  slug: string | null;
   excerpt: string | null;
   coverImage: {
     asset?: {
@@ -721,11 +831,11 @@ export type PostQueryResult = {
     crop?: SanityImageCrop;
     alt?: string;
     _type: "image";
-  };
+  } | null;
   date: string;
   author: {
-    firstName: string;
-    lastName: string;
+    firstName: string | null;
+    lastName: string | null;
     picture: {
       asset?: {
         _ref: string;
@@ -738,37 +848,349 @@ export type PostQueryResult = {
       crop?: SanityImageCrop;
       alt?: string;
       _type: "image";
-    };
+    } | null;
   } | null;
 } | null;
 // Variable: postPagesSlugs
 // Query: *[_type == "post" && defined(slug.current)]  {"slug": slug.current}
 export type PostPagesSlugsResult = Array<{
-  slug: string;
+  slug: string | null;
 }>;
 // Variable: pagesSlugs
 // Query: *[_type == "page" && defined(slug.current)]  {"slug": slug.current}
 export type PagesSlugsResult = Array<{
-  slug: string;
+  slug: string | null;
 }>;
 // Variable: allEducationalArticlesQuery
 // Query: *[_type == "educationalArticle" && defined(slug.current)] | order(publishedDate desc, _updatedAt desc) {      _id,  "status": select(_originalId in path("drafts.**") => "draft", "published"),  "title": coalesce(title, "Untitled"),  "slug": slug.current,  excerpt,  featuredImage,  category,  subcategory,  "publishedDate": coalesce(publishedDate, _updatedAt),  "author": author->{firstName, lastName, picture},  "medicalReviewer": medicalReviewer->{firstName, lastName, picture},  readingTime,  tags,  targetAudience,  featured,  }
-export type AllEducationalArticlesQueryResult = Array<never>;
+export type AllEducationalArticlesQueryResult = Array<{
+  _id: string;
+  status: "draft" | "published";
+  title: string | "Untitled";
+  slug: string | null;
+  excerpt: string | null;
+  featuredImage: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    _type: "image";
+  } | null;
+  category: "benefits" | "fertility" | "menopause" | "pregnancy" | "wellness" | null;
+  subcategory: "adoption-surrogacy" | "benefits-navigation" | "egg-freezing" | "fertility-testing" | "iui" | "ivf" | "lgbtq-family-building" | "male-fertility" | "maternal-mental-health" | "menopause-symptoms" | "mental-health" | "nutrition-lifestyle" | "postpartum-recovery" | "pregnancy-symptoms" | "prenatal-care" | "return-to-work" | "treatment-options" | "trying-to-conceive" | "workplace-support" | null;
+  publishedDate: string;
+  author: {
+    firstName: string | null;
+    lastName: string | null;
+    picture: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      alt?: string;
+      _type: "image";
+    } | null;
+  } | null;
+  medicalReviewer: {
+    firstName: string | null;
+    lastName: string | null;
+    picture: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      alt?: string;
+      _type: "image";
+    } | null;
+  } | null;
+  readingTime: number | null;
+  tags: Array<string> | null;
+  targetAudience: "consultants" | "employers" | "general" | "individuals" | "providers" | null;
+  featured: boolean | null;
+}>;
 // Variable: educationalArticleQuery
 // Query: *[_type == "educationalArticle" && slug.current == $slug] [0] {    content[]{      ...,      markDefs[]{        ...,          _type == "link" => {    "page": page->slug.current,    "post": post->slug.current  }      }    },      _id,  "status": select(_originalId in path("drafts.**") => "draft", "published"),  "title": coalesce(title, "Untitled"),  "slug": slug.current,  excerpt,  featuredImage,  category,  subcategory,  "publishedDate": coalesce(publishedDate, _updatedAt),  "author": author->{firstName, lastName, picture},  "medicalReviewer": medicalReviewer->{firstName, lastName, picture},  readingTime,  tags,  targetAudience,  featured,    seoTitle,    seoDescription,  }
-export type EducationalArticleQueryResult = null;
+export type EducationalArticleQueryResult = {
+  content: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+    listItem?: "bullet" | "number";
+    markDefs: Array<{
+      linkType?: "href" | "page" | "post";
+      href?: string;
+      page: string | null;
+      post: string | null;
+      openInNewTab?: boolean;
+      _type: "link";
+      _key: string;
+    }> | null;
+    level?: number;
+    _type: "block";
+    _key: string;
+  }> | null;
+  _id: string;
+  status: "draft" | "published";
+  title: string | "Untitled";
+  slug: string | null;
+  excerpt: string | null;
+  featuredImage: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    _type: "image";
+  } | null;
+  category: "benefits" | "fertility" | "menopause" | "pregnancy" | "wellness" | null;
+  subcategory: "adoption-surrogacy" | "benefits-navigation" | "egg-freezing" | "fertility-testing" | "iui" | "ivf" | "lgbtq-family-building" | "male-fertility" | "maternal-mental-health" | "menopause-symptoms" | "mental-health" | "nutrition-lifestyle" | "postpartum-recovery" | "pregnancy-symptoms" | "prenatal-care" | "return-to-work" | "treatment-options" | "trying-to-conceive" | "workplace-support" | null;
+  publishedDate: string;
+  author: {
+    firstName: string | null;
+    lastName: string | null;
+    picture: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      alt?: string;
+      _type: "image";
+    } | null;
+  } | null;
+  medicalReviewer: {
+    firstName: string | null;
+    lastName: string | null;
+    picture: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      alt?: string;
+      _type: "image";
+    } | null;
+  } | null;
+  readingTime: number | null;
+  tags: Array<string> | null;
+  targetAudience: "consultants" | "employers" | "general" | "individuals" | "providers" | null;
+  featured: boolean | null;
+  seoTitle: string | null;
+  seoDescription: string | null;
+} | null;
 // Variable: educationalArticlesSlugs
 // Query: *[_type == "educationalArticle" && defined(slug.current)]  {"slug": slug.current}
-export type EducationalArticlesSlugsResult = Array<never>;
+export type EducationalArticlesSlugsResult = Array<{
+  slug: string | null;
+}>;
 // Variable: homepageQuery
 // Query: *[_type == "homepage"] [0] {    title,    heroSection,    logos {      leftLogo {        image {          asset->{            _id,            url          },          alt        },        alt      },      rightLogo {        image {          asset->{            _id,            url          },          alt        },        alt      }    },    codeSnippet,    documentationLink,    seo  }
-export type HomepageQueryResult = null;
+export type HomepageQueryResult = {
+  title: string | null;
+  heroSection: {
+    tagline?: string;
+    mainTitle?: Array<{
+      text?: string;
+      link?: string;
+      color?: "brand" | "default" | "framework";
+      _key: string;
+    }>;
+  } | null;
+  logos: {
+    leftLogo: {
+      image: {
+        asset: {
+          _id: string;
+          url: string | null;
+        } | null;
+        alt: null;
+      } | null;
+      alt: string | null;
+    } | null;
+    rightLogo: {
+      image: {
+        asset: {
+          _id: string;
+          url: string | null;
+        } | null;
+        alt: null;
+      } | null;
+      alt: string | null;
+    } | null;
+  } | null;
+  codeSnippet: {
+    command?: string;
+    copyButtonText?: string;
+    copiedText?: string;
+  } | null;
+  documentationLink: {
+    text?: string;
+    url?: string;
+    openInNewTab?: boolean;
+  } | null;
+  seo: {
+    description?: string;
+  } | null;
+} | null;
 // Variable: educationalArticlesByCategoryQuery
 // Query: *[_type == "educationalArticle" && category == $category && defined(slug.current)] | order(publishedDate desc, _updatedAt desc) {      _id,  "status": select(_originalId in path("drafts.**") => "draft", "published"),  "title": coalesce(title, "Untitled"),  "slug": slug.current,  excerpt,  featuredImage,  category,  subcategory,  "publishedDate": coalesce(publishedDate, _updatedAt),  "author": author->{firstName, lastName, picture},  "medicalReviewer": medicalReviewer->{firstName, lastName, picture},  readingTime,  tags,  targetAudience,  featured,  }
-export type EducationalArticlesByCategoryQueryResult = Array<never>;
+export type EducationalArticlesByCategoryQueryResult = Array<{
+  _id: string;
+  status: "draft" | "published";
+  title: string | "Untitled";
+  slug: string | null;
+  excerpt: string | null;
+  featuredImage: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    _type: "image";
+  } | null;
+  category: "benefits" | "fertility" | "menopause" | "pregnancy" | "wellness" | null;
+  subcategory: "adoption-surrogacy" | "benefits-navigation" | "egg-freezing" | "fertility-testing" | "iui" | "ivf" | "lgbtq-family-building" | "male-fertility" | "maternal-mental-health" | "menopause-symptoms" | "mental-health" | "nutrition-lifestyle" | "postpartum-recovery" | "pregnancy-symptoms" | "prenatal-care" | "return-to-work" | "treatment-options" | "trying-to-conceive" | "workplace-support" | null;
+  publishedDate: string;
+  author: {
+    firstName: string | null;
+    lastName: string | null;
+    picture: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      alt?: string;
+      _type: "image";
+    } | null;
+  } | null;
+  medicalReviewer: {
+    firstName: string | null;
+    lastName: string | null;
+    picture: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      alt?: string;
+      _type: "image";
+    } | null;
+  } | null;
+  readingTime: number | null;
+  tags: Array<string> | null;
+  targetAudience: "consultants" | "employers" | "general" | "individuals" | "providers" | null;
+  featured: boolean | null;
+}>;
 // Variable: featuredEducationalArticlesQuery
 // Query: *[_type == "educationalArticle" && featured == true && defined(slug.current)] | order(publishedDate desc, _updatedAt desc) [0..2] {      _id,  "status": select(_originalId in path("drafts.**") => "draft", "published"),  "title": coalesce(title, "Untitled"),  "slug": slug.current,  excerpt,  featuredImage,  category,  subcategory,  "publishedDate": coalesce(publishedDate, _updatedAt),  "author": author->{firstName, lastName, picture},  "medicalReviewer": medicalReviewer->{firstName, lastName, picture},  readingTime,  tags,  targetAudience,  featured,  }
-export type FeaturedEducationalArticlesQueryResult = Array<never>;
+export type FeaturedEducationalArticlesQueryResult = Array<{
+  _id: string;
+  status: "draft" | "published";
+  title: string | "Untitled";
+  slug: string | null;
+  excerpt: string | null;
+  featuredImage: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    _type: "image";
+  } | null;
+  category: "benefits" | "fertility" | "menopause" | "pregnancy" | "wellness" | null;
+  subcategory: "adoption-surrogacy" | "benefits-navigation" | "egg-freezing" | "fertility-testing" | "iui" | "ivf" | "lgbtq-family-building" | "male-fertility" | "maternal-mental-health" | "menopause-symptoms" | "mental-health" | "nutrition-lifestyle" | "postpartum-recovery" | "pregnancy-symptoms" | "prenatal-care" | "return-to-work" | "treatment-options" | "trying-to-conceive" | "workplace-support" | null;
+  publishedDate: string;
+  author: {
+    firstName: string | null;
+    lastName: string | null;
+    picture: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      alt?: string;
+      _type: "image";
+    } | null;
+  } | null;
+  medicalReviewer: {
+    firstName: string | null;
+    lastName: string | null;
+    picture: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      alt?: string;
+      _type: "image";
+    } | null;
+  } | null;
+  readingTime: number | null;
+  tags: Array<string> | null;
+  targetAudience: "consultants" | "employers" | "general" | "individuals" | "providers" | null;
+  featured: boolean | null;
+}>;
 
 // Query TypeMap
 import "@sanity/client";

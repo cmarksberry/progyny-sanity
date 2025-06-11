@@ -85,11 +85,11 @@ export default async function ArticlePage(props: Props) {
                 <span>{article.readingTime} min read</span>
                 <span>•</span>
                 <span className="capitalize">For {article.targetAudience}</span>
-                {article.publishedAt && (
+                {article.publishedDate && (
                   <>
                     <span>•</span>
-                    <time dateTime={article.publishedAt}>
-                      {new Date(article.publishedAt).toLocaleDateString('en-US', {
+                    <time dateTime={article.publishedDate}>
+                      {new Date(article.publishedDate).toLocaleDateString('en-US', {
                         year: 'numeric',
                         month: 'long',
                         day: 'numeric'
