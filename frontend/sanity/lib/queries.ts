@@ -95,3 +95,94 @@ export const pagesSlugs = defineQuery(`
   *[_type == "page" && defined(slug.current)]
   {"slug": slug.current}
 `);
+
+// Educational Content Queries for Progyny
+const educationalArticleFields = /* groq */ `
+  _id,
+  "status": select(_originalId in path("drafts.**") => "draft", "published"),
+  "title": coalesce(title, "Untitled"),
+  "slug": slug.current,
+  excerpt,
+  featuredImage,
+  category,
+  subcategory,
+  "publishedDate": coalesce(publishedDate, _updatedAt),
+  "author": author->{firstName, lastName, picture},
+  "medicalReviewer": medicalReviewer->{firstName, lastName, picture},
+  readingTime,
+  tags,
+  targetAudience,
+  featured,
+`;
+
+export const allEducationalArticlesQuery = defineQuery(`
+  *[_type == "educationalArticle" && defined(slug.current)] | order(publishedDate desc, _updatedAt desc) {
+    ${educationalArticleFields}
+  }
+`);
+
+export const educationalArticleQuery = defineQuery(`
+  *[_type == "educationalArticle" && slug.current == $slug] [0] {
+    content[]{
+      ...,
+      markDefs[]{
+        ...,
+        ${linkReference}
+      }
+    },
+    ${educationalArticleFields}
+    seoTitle,
+    seoDescription,
+  }
+`);
+
+export const educationalArticlesSlugs = defineQuery(`
+  *[_type == "educationalArticle" && defined(slug.current)]
+  {"slug": slug.current}
+`);
+
+export const homepageQuery = defineQuery(`
+  *[_type == "homepage"] [0] {
+    title,
+    heroSection,
+    logos {
+      leftLogo {
+        image {
+          asset->{
+            _id,
+            url
+          },
+          alt
+        },
+        alt
+      },
+      rightLogo {
+        image {
+          asset->{
+            _id,
+            url
+          },
+          alt
+        },
+        alt
+      }
+    },
+    codeSnippet,
+    documentationLink,
+    seo
+  }
+`);
+
+export const educationalArticlesByCategoryQuery = defineQuery(`
+  *[_type == "educationalArticle" && category == $category && defined(slug.current)] | order(publishedDate desc, _updatedAt desc) {
+    ${educationalArticleFields}
+  }
+`);
+
+export const featuredEducationalArticlesQuery = defineQuery(`
+  *[_type == "educationalArticle" && featured == true && defined(slug.current)] | order(publishedDate desc, _updatedAt desc) [0..2] {
+    ${educationalArticleFields}
+  }
+`);
+
+

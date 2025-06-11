@@ -1,6 +1,8 @@
 import {person} from './documents/person'
 import {page} from './documents/page'
 import {post} from './documents/post'
+import {educationalArticle} from './documents/educationalArticle'
+import {homepage} from './singletons/homepage'
 import {callToAction} from './objects/callToAction'
 import {infoSection} from './objects/infoSection'
 import {settings} from './singletons/settings'
@@ -12,10 +14,13 @@ import {blockContent} from './objects/blockContent'
 export const schemaTypes = [
   // Singletons
   settings,
+  homepage,
   // Documents
   page,
   post,
   person,
+  // Progyny Educational Content
+  educationalArticle,
   // Objects
   blockContent,
   infoSection,
