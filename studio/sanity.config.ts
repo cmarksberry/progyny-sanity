@@ -21,8 +21,9 @@ import {assist} from '@sanity/assist'
 const projectId = process.env.SANITY_STUDIO_PROJECT_ID || 'your-projectID'
 const dataset = process.env.SANITY_STUDIO_DATASET || 'production'
 
-// URL for preview functionality, defaults to localhost:3000 if not set
+// URLs for preview functionality - supports both local development and production
 const SANITY_STUDIO_PREVIEW_URL = process.env.SANITY_STUDIO_PREVIEW_URL || 'http://localhost:3000'
+const PRODUCTION_URL = 'https://progyny-sanity-frontend.vercel.app'
 
 // Define the home location for the presentation tool
 const homeLocation = {
@@ -58,7 +59,9 @@ export default defineConfig({
     // Presentation tool configuration for Visual Editing
     presentationTool({
       previewUrl: {
-        origin: SANITY_STUDIO_PREVIEW_URL,
+        origin: typeof window !== 'undefined' && window.location.origin.includes('vercel.app') 
+          ? PRODUCTION_URL 
+          : SANITY_STUDIO_PREVIEW_URL,
         previewMode: {
           enable: '/api/draft-mode/enable',
         },
