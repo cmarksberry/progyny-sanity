@@ -59,9 +59,7 @@ export default defineConfig({
     // Presentation tool configuration for Visual Editing
     presentationTool({
       previewUrl: {
-        origin: typeof window !== 'undefined' && window.location.origin.includes('vercel.app') 
-          ? PRODUCTION_URL 
-          : SANITY_STUDIO_PREVIEW_URL,
+        origin: SANITY_STUDIO_PREVIEW_URL,
         previewMode: {
           enable: '/api/draft-mode/enable',
         },
@@ -71,7 +69,7 @@ export default defineConfig({
         mainDocuments: defineDocuments([
           {
             route: '/',
-            filter: `_type == "settings" && _id == "siteSettings"`,
+            filter: `_type == "homepage"`,
           },
           {
             route: '/:slug',
@@ -88,9 +86,9 @@ export default defineConfig({
         ]),
         // Locations Resolver API allows you to define where data is being used in your application. https://www.sanity.io/docs/presentation-resolver-api#8d8bca7bfcd7
         locations: {
-          settings: defineLocations({
+          homepage: defineLocations({
             locations: [homeLocation],
-            message: 'This document is used on all pages',
+            message: 'This document is used on the homepage',
             tone: 'positive',
           }),
           page: defineLocations({
