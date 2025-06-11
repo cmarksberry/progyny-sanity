@@ -79,7 +79,7 @@ export default async function Page() {
                         </span>
                       )}
                       {index < (homepage?.heroSection?.mainTitle?.length || 0) - 1 && (
-                        titlePart.text.endsWith('+') ? '' : '+'
+                        titlePart.text?.endsWith('+') ? '' : '+'
                       )}
                     </span>
                   )) || (

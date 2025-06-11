@@ -3,22 +3,22 @@ interface EditableLogosProps {
     image?: {
       asset?: {
         _id: string;
-        url: string;
-      };
-      alt?: string;
-    };
-    alt: string;
-  };
+        url: string | null;
+      } | null;
+      alt?: string | null;
+    } | null;
+    alt: string | null;
+  } | null;
   rightLogo?: {
     image?: {
       asset?: {
         _id: string;
-        url: string;
-      };
-      alt?: string;
-    };
-    alt: string;
-  };
+        url: string | null;
+      } | null;
+      alt?: string | null;
+    } | null;
+    alt: string | null;
+  } | null;
 }
 
 export default function EditableLogos({ leftLogo, rightLogo }: EditableLogosProps) {
@@ -61,8 +61,8 @@ export default function EditableLogos({ leftLogo, rightLogo }: EditableLogosProp
       <div className="z-10 aspect-square w-32 h-32 flex justify-center items-center rounded-full border-white border-4 bg-white transform translate-x-2 group-hover:scale-110 group-hover:-translate-x-5 transition-all duration-300">
         {leftLogo?.image?.asset?.url ? (
           <img 
-            src={leftLogo.image.asset.url}
-            alt={leftLogo.alt}
+            src={leftLogo.image.asset.url || ''}
+            alt={leftLogo.alt || 'Logo'}
             className="w-full h-full object-contain rounded-full"
           />
         ) : (
@@ -79,8 +79,8 @@ export default function EditableLogos({ leftLogo, rightLogo }: EditableLogosProp
       <div className="aspect-square w-32 h-32 border-white border-4 flex justify-center items-center rounded-full transform -translate-x-2 group-hover:scale-110 group-hover:translate-x-5 transition-all duration-300">
         {rightLogo?.image?.asset?.url ? (
           <img 
-            src={rightLogo.image.asset.url}
-            alt={rightLogo.alt}
+            src={rightLogo.image.asset.url || ''}
+            alt={rightLogo.alt || 'Logo'}
             className="w-full h-full object-contain rounded-full"
           />
         ) : (
